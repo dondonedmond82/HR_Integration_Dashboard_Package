@@ -6,7 +6,7 @@ Run:
     pip install panel pandas openpyxl plotly numpy
     panel serve hr_integration_dashboard.py --show
 
-Place Data_Set_Case_Study_Homework(1).xlsx in the same folder as this script,
+Place Data_Set_Case_Study_Homework.xlsx in the same folder as this script,
 or set HR_WORKBOOK to the workbook path in your environment.
 """
 import os
@@ -25,9 +25,9 @@ pn.extension("plotly", "tabulator", sizing_mode="stretch_width")
 APP_DIR = Path(__file__).resolve().parent
 WORKBOOK_CANDIDATES = [
     Path(os.environ["HR_WORKBOOK"]) if os.environ.get("HR_WORKBOOK") else None,
-    APP_DIR / "Data_Set_Case_Study_Homework(1).xlsx",
     APP_DIR / "Data_Set_Case_Study_Homework.xlsx",
-    Path.cwd() / "Data_Set_Case_Study_Homework(1).xlsx",
+    APP_DIR / "Data_Set_Case_Study_Homework.xlsx",
+    Path.cwd() / "Data_Set_Case_Study_Homework.xlsx",
     Path.cwd() / "Data_Set_Case_Study_Homework.xlsx",
 ]
 WORKBOOK = next((p for p in WORKBOOK_CANDIDATES if p is not None and p.exists()), None)
@@ -57,7 +57,7 @@ def _parse_date(series):
 def load_unit(sheet_name):
     if WORKBOOK is None:
         raise FileNotFoundError(
-            "HR workbook not found. Put Data_Set_Case_Study_Homework(1).xlsx beside this script "
+            "HR workbook not found. Put Data_Set_Case_Study_Homework.xlsx beside this script "
             "or set the HR_WORKBOOK environment variable."
         )
     # The supplied workbook contains introductory rows before the employee table.
